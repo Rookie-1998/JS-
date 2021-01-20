@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            margin-left: 5px;
+        }
+        
+        .right {
+            color: greenyellow;
+            font-size: 14px;
+        }
+        
+        .wrong {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" value=""><span>请输入内容</span>
+    <script>
+        var reg = /^[a-zA-Z0-9_-]{6,16}$/;
+        var ipt = document.querySelector('input');
+        var span = document.querySelector('span');
+        ipt.onblur = function() {
+            if (reg.test(this.value)) {
+                console.log('正确的');
+                span.className = 'right';
+                span.innerHTML = '用户输入格式正确';
+            } else {
+                console.log('错误的');
+                span.className = 'wrong';
+                span.innerHTML = '用户输入格式错误';
+            }
+        }
+    </script>
+</body>
+
+</html>

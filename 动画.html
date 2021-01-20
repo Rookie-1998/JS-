@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 定义动画 */
+        /* from 和to等价于0%和100% */
+        /* @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(900px);
+            }
+        } */
+        
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(800px, 0);
+            }
+            50% {
+                transform: translate(800px, 500px);
+            }
+            75% {
+                transform: translate(0, 500px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+        
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            /* 调用动画 */
+            animation-name: move;
+            animation-duration: 10s;
+        }
+        /*   thead {
+            width: 100px;
+            margin: 100px auto;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- <div></div>
+    <ul>
+        <li>111</li>
+        <li>2223</li>
+        <li>333</li>
+    </ul> -->
+    <thead>
+        <tr>姓名</tr>
+        <tr>科目</tr>
+        <tr>成绩</tr>
+        <tr>操作</tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    <script>
+        /*   var ul = document.querySelector('ul');
+                                                                                        // 浅拷贝，只克隆标签不复制内容
+                                                                                        // var lili = ul.children[0].cloneNode();
+                                                                                        // 深拷贝
+                                                                                        var lili = ul.children[0].cloneNode(true);
+                                                                                        ul.appendChild(lili); */
+        // 先把数据拿过来
+        // 注意是逗号，不是顿号
+        var date = [{
+                name: '魏璎珞',
+                subject: 'javascript',
+                score: 100,
+            }, {
+                name: '喜洋洋',
+                subject: 'javascript',
+                score: 78,
+            }, {
+                name: '懒洋洋',
+                subject: 'javascript',
+                score: 98,
+            }
+
+        ]
+        var tbody = document.querySelector('tbody');
+        for (var i = 0; i < date.length; i++) {
+            // 创建tr行
+            var tr = document.createElement('tr');
+            tbody.appendChild(tr);
+            for (var k in date) {
+                var td = document.createElement('td');
+                // 把对象里面的属性值date[i][k]
+                td.innerHTML = date[i][k];
+                tr.appendChild(td);
+            }
+            var td = document.createElement('td');
+            td.innerHTML = '<a href="javascript:;">删除<a/>';
+            tr.appendChild(td);
+        }
+    </script>
+</body>
+
+</html>

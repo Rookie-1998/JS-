@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .slider-bar {
+            position: absolute;
+            left: 50%;
+            top: 300px;
+            margin-left: 600px;
+            width: 45px;
+            height: 130px;
+            background-color: pink;
+        }
+        
+        .w {
+            width: 1200px;
+            margin: 10px auto;
+        }
+        
+        .header {
+            height: 150px;
+            background-color: purple;
+        }
+        
+        .banner {
+            height: 250px;
+            background-color: skyblue;
+        }
+        
+        .main {
+            height: 1000px;
+            background-color: yellowgreen;
+        }
+        
+        span {
+            /* 刚开始要先隐藏起来 */
+            display: none;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-bar">
+        <span class="goBack">返回顶部</span>
+    </div>
+    <div class="header w">头部区域</div>
+    <div class="banner w">banner区域</div>
+    <div class="main w">主体部分</div>
+    <script>
+        // 1.先获取需要的元素
+        var sliderbar = document.querySelector('.slider-bar');
+        var banner = document.querySelector('.banner');
+        // console.log(banner.OffsetTop);
+        var bannerTop = banner.offsetTop;
+        var sliderbarTop = sliderbar.offsetTop - bannerTop;
+        // 获取主体元素
+        var main = document.querySelector('.main');
+        var goBack = document.querySelector('.goBack');
+        var mainTop = main.offsetTop;
+        // 另外要解决的是侧边栏随着页面滚动突然掉下来的问题，这里的重点是让侧边栏一直保持着相同的距离，
+        // 这个距离我们可以用本身的offsetTop减去banner的offsetTop来得到
+        // 就是当页面滚动到banner这个地方的时候，让侧边栏变成固定定位的时候与上面的距离保持为上面所提到的距离
+        // 2.来注册事件，注意是给整个页面
+        document.addEventListener('scroll', function() {
+            // console.log(11);
+            // 下面我们来显示页面被卷去的头部
+            // console.log(window.pageYOffset);
+            // 当我们头部被卷去的页面大小大于170时，就让侧边栏的定位改成固定定位
+            // 注意这里的170我们可以让他变成活的，其实这就是banner.offsetTop的值,我们需要获取过来
+            // 当页面显示到主体部分的时候，让goback 返回顶部显示出来
+            if (window.pageYOffset >= bannerTop) {
+                sliderbar.style.position = 'fixed';
+                // 一定要注意加单位
+                sliderbar.style.top = sliderbarTop + 'px';
+            } else {
+                // 当小于170时就变回绝对定位
+                sliderbar.style.position = 'absolute';
+                // 当回去的时候让它变回原来的300px
+                sliderbar.style.top = '300px';
+            }
+            // 如果页面头部被卷去的距离大于mainTop,就让goback显示出来
+            if (window.pageYOffset >= mainTop) {
+                goBack.style.display = 'block';
+            } else {
+                goBack.style.display = 'none';
+            }
+            goBack.addEventListener('click', function() {
+                // 里面的x和y直接写内存即可
+                // window.scroll(0, 0);
+                // 因为是窗口滚动,所以我们用window
+                anmiate(window, 0);
+            })
+        });
+        // 把所有left相关的值都改成页面垂直滚动距离
+        function anmiate(obj, target, callback) {
+            // console.log(callback);
+            // 这里会出现一个bug，就当我们不断点击按钮，元素会移动的更快，这是因为它会不断的调用定时器
+            // 我们可以将var timer改成obj.timer，因为每次var它都会在内存中开辟一个空间去存储这个定时器，数量一多会降低性能
+            // 解决方案就是只让一个定时器运行，这样每次点击的时候，上次点击的定时器就会被清除
+            clearInterval(obj.timer);
+            // var timer = setInterval(function() {
+            obj.timer = setInterval(function() {
+                // 步长值要写到定时器里面
+                // 缓动动画原理 核心算法:(目标值-现在的位置)/10
+                // 需要把步长改为整数，并且是往大了取 math.ceil
+                // var step = Math.ceil((target - obj.offsetLeft) / 10);
+                // 判断步长是正的还是负的，因为这会影响位置大小
+                var step = (target - window.pageYOffset) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (window.pageYOffset == target) {
+                    // 停止动画，本质上就是停止计时器
+                    // 这里也要改成obj.timer
+                    clearInterval(obj.timer);
+                    // 回调函数要写到计时器结束之后 ,先判断有没有回调函数
+                    if (callback) {
+                        callback();
+                    }
+
+                }
+                // obj.style.left = obj.offsetLeft + 5 + 'px';
+                // obj.style.left = window.pageYOffset + step + 'px';
+                window.scroll(0, window.pageYOffset + step);
+            }, 30)
+        }
+        var div = document.querySelector('div');
+        var btn500 = document.querySelector('.btn500');
+        var btn800 = document.querySelector('.btn800');
+        btn500.addEventListener('click', function() {
+            anmiate(div, 500);
+        });
+        btn800.addEventListener('click', function() {
+            // 这里是把函数作为一个参数调用
+            anmiate(div, 800, function() {
+                // alert('你好吗');
+                div.style.backgroundColor = 'red';
+                div.innerHTML = '两头猪';
+            });
+        });
+    </script>
+</body>
+
+</html>

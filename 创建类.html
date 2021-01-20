@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        /*   // 创建类
+                                                                                                                                                                                                                                                                                                                                                class Star {
+                                                                                                                                                                                                                                                                                                                                                    // 创建构造函数
+                                                                                                                                                                                                                                                                                                                                                    constructor(uname) {
+                                                                                                                                                                                                                                                                                                                                                            this.uname = uname;
+                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                        // 多个方法之间不用加逗号
+                                                                                                                                                                                                                                                                                                                                                        // 添加方法,就是直接添加
+                                                                                                                                                                                                                                                                                                                                                    sing(song) {
+                                                                                                                                                                                                                                                                                                                                                        console.log(this.uname + '唱了' + song);
+                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                // 利用类创建对象
+                                                                                                                                                                                                                                                                                                                                                var ljj = new Star('林俊杰');
+                                                                                                                                                                                                                                                                                                                                                console.log(ljj.uname);
+                                                                                                                                                                                                                                                                                                                                                // 让对象实例调用方法
+                                                                                                                                                                                                                                                                                                                                                ljj.sing('曹操'); */
+
+
+        // 继承
+        /*  class Father {
+             constructor(x, y) {
+                 this.x = x;
+                 this.y = y;
+             }
+             sum() {
+                 console.log(this.x + this.y);
+             }
+         } */
+        /*   class Son extends Father {
+              constructor(x, y) {
+                      // this.x = x;
+                      // this.y = y;
+                      super(x, y);
+                      this.x = x;
+                      this.y = y;
+
+                      //super调用父类构造函数
+                  }
+                  // 调用父类的方法的同时拓展新的方法
+              substrat() {
+                  console.log(this.x - this.y);
+              }
+          }
+          var son = new Son(2, 1);
+          son.sum();
+          son.substrat(); */
+        /* 
+                class Father {
+                    // say()普通函数
+                    say() {
+                        // console.log('我是你爹');
+                        return '我是你爹';
+                    }
+                }
+                class Son extends Father {
+
+                    say() {
+                        console.log(super.say() + '的儿子');
+                    }
+                }
+                var son = new Son;
+                son.say(); */
+        // ES6之前没有类
+        /*  function Star(uname, age) {
+             this.uname = uname;
+             this.age = age;
+         }
+         // 原形对象,实现了方法的共享
+         var that;
+         Star.prototype.sing = function() {
+             console.log('我爱唱歌');
+             that = this;
+         }
+
+         var ljj = new Star('林俊杰', 30);
+         ljj.sing();
+         console.log(that === ljj); */
+
+        /*   function fn(a, b) {
+              console.log('我想和蓝山咖啡');
+              console.log(this);
+              console.log(a * b);
+          }
+          var o = {
+                  uname: '老八',
+              }
+              // 用call调用函数,可以改变this 的指向
+          fn.call(o, 3, 6); */
+
+        /*  function Father(uname, age) {
+             this.uname = uname;
+             this.age = age;
+         }
+         Father.prototype.money = function() {
+             console.log('我一天挣十万');
+         }
+
+         function Son(uname, age, score) {
+             Father.call(this, uname, age);
+             this.score = score;
+         }
+         // 继承父类的方法
+         // Son.prototype = Father.prototype;
+         Son.prototype = new Father();
+         // 要指回原来的构造函数
+         Son.prototype.constructor = son;
+         // 这是父亲也会添加到这个方法
+         Son.prototype.exam = function() {
+                 console.log('娃要考试');
+             }
+             // 已经可以让子构造函数继承父构造函数里面的属性
+         var son = new Son('薛之谦', 30, 99);
+         console.log(son);
+         console.log(Son.prototype.constructor); */
+        //  数组遍历
+        /*    var arr = [1, 2, 3];
+           arr.forEach(function(value, index, array) {
+               console.log(value);
+               console.log(index);
+               console.log(array);
+           }) */
+        // 数组筛选
+        /*  var arr = [33, 43, 2, 45];
+         var newArr = arr.filter(function(value, index) {
+             // return value >= 20;
+             return value % 2 == 0;
+         })
+         console.log(newArr); */
+        // some查询是否有满足条件的
+        var arr = [23, 24, 56, 6];
+        var flag = arr.some(function(value) {
+            return value >= 20;
+        })
+        console.log(flag);
+    </script>
+</body>
+
+</html>

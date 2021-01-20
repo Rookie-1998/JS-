@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            width: 80px;
+            height: 50px;
+            line-height: 50px;
+            background-color: pink;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn500">点击500</button>
+    <button class="btn800">点击800</button>
+    <div>一头猪</div>
+    <script>
+        /*  // 获得盒子当前位置
+                                                    var div = document.querySelector('div');
+                                                   // 让盒子在当前加上一个移动距离
+                                                   // div.style.left = div.offsetLeft + 5 + 'px';
+                                                    // 利用定时器不断重复这个动作
+                                                   // 给定时器一个结束的动作
+                                                    // 注意元素要加定位
+                                                   var timer = setInterval(function() {
+                                                    if (div.offsetLeft >= 400) {
+                                                    // 停止动画，本质上就是停止计时器
+                                                        clearInterval(timer);
+                                                   }
+                                                    div.style.left = div.offsetLeft + 5 + 'px';
+                                                    }, 30) */
+
+        // 下面对动画函数进行封装
+        // obj目标对象，target目标位置
+        function anmiate(obj, target, callback) {
+            console.log(callback);
+            // 这里会出现一个bug，就当我们不断点击按钮，元素会移动的更快，这是因为它会不断的调用定时器
+            // 我们可以将var timer改成obj.timer，因为每次var它都会在内存中开辟一个空间去存储这个定时器，数量一多会降低性能
+            // 解决方案就是只让一个定时器运行，这样每次点击的时候，上次点击的定时器就会被清除
+            clearInterval(obj.timer);
+            // var timer = setInterval(function() {
+            obj.timer = setInterval(function() {
+                // 步长值要写到定时器里面
+                // 缓动动画原理 核心算法:(目标值-现在的位置)/10
+                // 需要把步长改为整数，并且是往大了取 math.ceil
+                // var step = Math.ceil((target - obj.offsetLeft) / 10);
+                // 判断步长是正的还是负的，因为这会影响位置大小
+                var step = (target - obj.offsetLeft) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (obj.offsetLeft == target) {
+                    // 停止动画，本质上就是停止计时器
+                    // 这里也要改成obj.timer
+                    clearInterval(obj.timer);
+                    // 回调函数要写到计时器结束之后 ,先判断有没有回调函数
+                    if (callback) {
+                        callback();
+                    }
+
+                }
+                // obj.style.left = obj.offsetLeft + 5 + 'px';
+                obj.style.left = obj.offsetLeft + step + 'px';
+            }, 30)
+        }
+        var div = document.querySelector('div');
+        var btn500 = document.querySelector('.btn500');
+        var btn800 = document.querySelector('.btn800');
+        btn500.addEventListener('click', function() {
+            anmiate(div, 500);
+        });
+        btn800.addEventListener('click', function() {
+            // 这里是把函数作为一个参数调用
+            anmiate(div, 800, function() {
+                // alert('你好吗');
+                div.style.backgroundColor = 'red';
+                div.innerHTML = '两头猪';
+            });
+        });
+        // anmiate(div, 300);
+        // 性能优化:给不同的对象添加不同的定时器
+    </script>
+</body>
+
+</html>

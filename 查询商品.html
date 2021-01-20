@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            width: 400px;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
+        td,
+        th {
+            border: 1px solid #000;
+            text-align: center;
+        }
+        
+        input {
+            width: 50px;
+        }
+        
+        .search {
+            width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        按照价格查询: <input type="text" class="start"> - <input type="text" class="end"> <button class="search-price">搜索</button> 按照商品名称查询: <input type="text" class="product"> <button class="search-pro">查询</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>产品名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+    <script>
+        // 利用新增数组方法操作数据
+        var data = [{
+            id: 1,
+            pname: '小米',
+            price: 3999
+        }, {
+            id: 2,
+            pname: 'oppo',
+            price: 999
+        }, {
+            id: 3,
+            pname: '荣耀',
+            price: 1299
+        }, {
+            id: 4,
+            pname: '华为',
+            price: 1999
+        }, ];
+        // 第一步先获取需要的元素，也就是tbody
+        var tbody = document.querySelector('tbody');
+        // 第三步再获取按钮表单等元素
+        var btns = document.querySelector('.search-price');
+        var start = document.querySelector('.start');
+        var end = document.querySelector('.end');
+        // 第十步获取后面根据商品名称查询所需要的元素
+        var product = document.querySelector('.product');
+        var search_pro = document.querySelector('.search-pro');
+        // 第七步把上面的data数据传到mydata中
+        setDate(data);
+        // 第二步把数据渲染到页面中去
+        // 1先循环数据
+        // 第六步把渲染页面封装到一个函数中
+        function setDate(mydata) {
+            // 第九步要把tbody之前的数据清空掉
+            tbody.innerHTML = '';
+            mydata.forEach(function(value) {
+                // 2创建tr也就是行,然后给里头添加三个td
+                var tr = document.createElement('tr');
+                // 把三个td也就是三个单元格添加进去
+                // tr.innerHTML = "<td>1</td><td>1</td><td>1</td>";
+                tr.innerHTML = '<td>' + value.id + '</td><td>' + value.pname + '</td><td>' + value.price + '</td>';
+                // 然后把tr添加给tbody
+                tbody.appendChild(tr);
+            });
+        }
+        // 第四步先给按钮注册事件
+        btns.addEventListener('click', function() {
+            // alert(11);
+            // 第五步拿到我们的数组元素 value指的是元素对象
+            var newDate = data.filter(function(value) {
+                // console.log(value);
+
+                // 思路是让对象里的价格大于第一个文本框里头的值,小于第二个文本框里头的值
+                // return value.price >= start.price && value.price <= end.price;
+                return value.price >= start.value && value.price <= end.value;
+            });
+            console.log(newDate);
+            // 第八步把新的数组的数据传到setDate中去 点击按钮之后就会拿到新的数组，我们要把新的数组渲染到页面中去
+            setDate(newDate);
+        });
+        // 第十一步给查询按钮注册事件
+        search_pro.addEventListener('click', function() {
+            // 1先定义一个数组
+            var arr = []
+                // 查询一组数据中唯一一个数组
+            data.some(function(value) {
+                // 当文本框里面的值等于商品的值就返回值
+                if (value.pname === product.value) {
+                    // console.log(value);
+                    // 2把拿到的数据添加到数组中去
+                    arr.push(value);
+                    return true; //return后面一定要写true 这里是为了终止迭代 forEach和filiter不会终止迭代 ，在some里就是终止，效率更高
+                }
+            });
+            // 接下来要把拿到的数据渲染到页面中去，我们用的数数组的方法 调用渲染方法
+            setDate(arr);
+
+                          
+
+        })
+    </script>
+</body>
+
+</html>
