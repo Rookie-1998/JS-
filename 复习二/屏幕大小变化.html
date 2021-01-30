@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+        }
+    </style>
+
+    /* // 效果是如果浏览器的宽度小于800，那么盒子就会消失 window.addEventListener('load', function() { var div = document.querySelector('div'); window.addEventListener('resize', function() { console.log(window.innerWidth); console.log('我变化了'); if (window.innerWidth =8 00) { div.style.display="none"
+    ; } else { div.style.display="block" ; } }) }) */ // 定时器，可以在三秒后显示效果 /* window.setTimeout(function() { console.log( '开始爆炸'); }, 3000) */ /* function boom() { console.log( '大爆炸'); } setTimeout(boom, 4000); */ // 5秒自动关闭广告
+</head>
+
+<body>
+    <!--  <div></div>
+    <img src="ad.jpg" alt="" class="ad">
+    <script>
+        var ad = document.querySelector('.ad');
+        setTimeout(function() {
+            ad.style.display = 'none';
+        }, 5000)
+    </script> -->
+    <button>停止射击</button>
+    <script>
+        /*  var btns = document.querySelector('button');
+                var timer = setTimeout(function() {
+                    console.log('全球大爆炸');
+                }, 3000);
+                btns.addEventListener('click', function() {
+                        clearTimeout(timer);
+                    })
+                    // clearTimeout(timer); */
+        // 这个是在一直循环
+        setInterval(function() {
+            console.log('持续爆炸');
+        }, 1000);
+    </script>
+</body>
+
+</html>

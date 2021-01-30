@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+        
+        .bg {
+            background-color: #000;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="one two"></div>
+    <button>开关灯</button>
+    <script>
+        var div = document.querySelector('div');
+        console.log(div.classList);
+        // 可以添加类名
+        div.classList.add('three');
+        // 删除类名
+        div.classList.remove('one');
+        div.addEventListener('touchstart', function(e) {
+            // console.log('我摸了你');
+            //   console.log(e);
+            console.log(e.targetTouches[0]);
+        });
+        // 要按着不松开
+        // 得到的是第一个触摸元素手指的信息
+
+        div.addEventListener('touchmove', function() {
+            console.log('我化了你');
+        })
+        div.addEventListener('touchend', function(e) {
+            // console.log('我踢了你');
+            console.log(e);
+        })
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function() {
+            document.body.classList.toggle('bg');
+        })
+    </script>
+</body>
+
+</html>

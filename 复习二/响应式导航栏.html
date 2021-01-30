@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        .contenter {
+            /* height: 50px; */
+            width: 750px;
+            /* background-color: green; */
+            margin: 0 auto;
+        }
+        
+        .contenter ul li {
+            float: left;
+            font-size: 24px;
+            width: 93.75px;
+            height: 30px;
+            background-color: green;
+            /* 每个li之间的距离通过宽度来调就好了 */
+            /* padding: 5px 42px; */
+        }
+        
+        @media screen and (max-width: 767px) {
+            .contenter {
+                width: 100%;
+            }
+            .contenter ul li {
+                width: 33.3%;
+            }
+        }
+        
+        ;
+        @media screen and (min-width: 767px) {
+            .contenter {
+                width: 750px;
+            }
+        }
+        
+        ;
+        @media screen and (min-width: 929px) {
+            .contenter {
+                width: 970px;
+            }
+        }
+        
+        ;
+        @media screen and (min-width:1200px) {
+            .contenter {
+                width: 1170px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenter">
+        <ul>
+            <li>测试1</li>
+            <li>测试1</li>
+            <li>测试1</li>
+            <li>测试1</li>
+            <li>测试1</li>
+            <li>测试1</li>
+            <li>测试1</li>
+            <li>测试1</li>
+            <li>测试1</li>
+
+        </ul>
+    </div>
+</body>
+
+</html>

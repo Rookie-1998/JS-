@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     const a = 2;
+    //     const b = 3;
+    //     console.log(a+b);
+    //   setTimeout(() => {
+    //       console.log(a+b)
+    //   },1000)
+    // console.log(1);
+    // setTimeout(() => {
+    //     console.log(2)
+    // },0)
+    // console.log(3)
+
+    //ajax原理
+    //1.创建XMLHttprequest对象
+    // var xmlhttp = null;
+    // xmlhttp = new XMLHttpRequest();
+    // //2.发送请求
+    // xmlhttp.open('GET',url,true);
+    // xmlhttp.send()
+    // //3.服务器响应 ，给当前的对象监听一个onreadystatechange事件，如果服务端响应了就会进入到事件的处理函数里
+
+    // xmlhttp.onreadystatechange = function(){
+    //     if(xmlhtpp.readyState === 4 && xmlhttp.status ===200) {
+    //         var obj = JSON.parse(xmlhttp.responseText)
+    //         console.log(obj)
+    //     }
+    // }
+    // resolve是异步执行成功的时候执行的回调函数
+    // reject是异步执行失败的时候执行的回调函数
+    // 状态管理
+    let p = new Promise((resolve,reject) => {
+        setTimeout(() => {
+            console.log('imooc')
+            // resolve('成功');
+            reject('失败');
+            // if() {
+            //     resolve()
+            // }else {
+            //     reject()
+            // }
+            
+        },1000)
+    }).then((res) => {
+        console.log(res);
+    },(err) => {
+        console.log(err);
+    })
+
+    let p1 = new Promise((resolve,reject) => {
+        setTimeout(() => {
+            console.log(1);
+            resolve();
+        },1000)
+    })
+    let p2 = new Promise((resolve,reject) => {
+        setTimeout(() => {
+            console.log(2);
+            resolve();
+        },2000)
+    })
+    let p3 = new Promise((resolve,reject) => {
+        setTimeout(() => {
+            console.log(3);
+            resolve();
+        },1000)
+    })
+    //只要有一个成功就算成功，有一个失败就算失败
+    Promise.race([p1,p2,p3]).then(res => {
+        console.log(res);
+    }),err => {
+        console.log(err);
+    }
+  
+    </script>
+</body>
+</html>

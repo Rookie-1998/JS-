@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>密码位数</title>
+    <style>
+        div {
+            /* height: 50px; */
+            width: 600px;
+            margin: 100px auto;
+        }
+        
+        .message {
+            display: inline-block;
+            font-size: 12px;
+            color: #999;
+            background: url(mess.png) no-repeat;
+            padding-left: 20px;
+        }
+        /* 用于密码错误时的样式 */
+        
+        .wrong {
+            background-image: url(wrong.png);
+            color: red;
+        }
+        /* 用于密码正确时的样式 */
+        
+        .right {
+            background-image: url(right.png);
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text" class="ipt">
+        <p class="message">请输入6-16位密码</p>
+    </div>
+    <script>
+        // 判断事件失去焦点 onblur
+        // 1.获取元素
+        var ipt = document.querySelector(".ipt");
+        var message = document.querySelector(".message");
+        // 2.注册事件 失去焦点
+        ipt.onblur = function() {
+            // 判断6-16位密码的关键是通过表单里面的长度来判断 即ipt.vaule.length
+            if (this.value.length < 6 || this.value.length > 16) {
+                // console.log("错误");
+                // 在改变样式的时候不要直接改成wrong，我们还需要用到message中的一些样式，所以要保留
+                // 通过多类名
+                message.className = 'message wrong';
+                message.innerHTML = '请输入6-16位密码';
+            } else {
+                message.className = 'message right';
+                message.innerHTML = '密码输入正确';
+            }
+        }
+    </script>
+</body>
+
+</html>

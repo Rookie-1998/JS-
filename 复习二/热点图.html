@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #333;
+        }
+        /* 现在显示不了，因为是透明的，所以需要给盒子一个背景颜色 */
+        /* 1 */
+        
+        .map {
+            position: relative;
+            width: 727px;
+            height: 617px;
+            background-image: url(map.png);
+            margin: 0 auto;
+        }
+        /* 2 */
+        
+        .city {
+            position: absolute;
+            top: 227px;
+            right: 175px;
+            color: #fff;
+        }
+        
+        .tb {
+            top: 500px;
+            right: 62px;
+        }
+        
+        .gz {
+            top: 542px;
+            right: 176px;
+        }
+        
+        .dotted {
+            width: 8px;
+            height: 8px;
+            background-color: #09f;
+            border-radius: 50%;
+        }
+        /* 3 */
+        
+        .city div[class^=pulse] {
+            position: absolute;
+            /* 让小盒子垂直居中 */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            box-shadow: 0 0 12px #09f;
+            border-radius: 50%;
+            animation: pulse 1.2s linear infinite;
+        }
+        /* 这里要注意权重的问题 */
+        
+        .city div.pulse2 {
+            animation-delay: 0.4s;
+        }
+        
+        .city div.pulse3 {
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes pulse {
+            0% {}
+            70% {
+                width: 40px;
+                height: 40px;
+                /* transform: scale(5); */
+                /* 透明度 */
+                opacity: 1;
+            }
+            100% {
+                width: 70px;
+                height: 70px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map">
+        <!-- 2 -->
+        <div class="city">
+            <div class="dotted"></div>
+            <div class="pulse1"></div>
+            <div class="pulse2"></div>
+            <div class="pulse3"></div>
+        </div>
+        <div class="city tb">
+            <div class="dotted"></div>
+            <div class="pulse1"></div>
+            <div class="pulse2"></div>
+            <div class="pulse3"></div>
+        </div>
+        <div class="city gz">
+            <div class="dotted"></div>
+            <div class="pulse1"></div>
+            <div class="pulse2"></div>
+            <div class="pulse3"></div>
+        </div>
+
+    </div>
+</body>
+
+</html>

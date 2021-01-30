@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .input text {
+            /* width: 100px; */
+            /* color: #888; */
+            outline: none;
+            border: 1px solid #ccc;
+        }
+        
+        .ipt {
+            border: 1px solid #ccc;
+            color: #ccc;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="index">
+        <form action="">
+            <input type="text" class="ipt" id="uname" value="邮箱/手机号/ID">
+        </form>
+    </div>
+    <script>
+        // var ipt = document.querySelector("ipt");
+        var ipt = document.getElementById("uname");
+        ipt.onfocus = function() {
+            this.value = "";
+            this.className = "input text"
+        }
+        ipt.onblur = function() {
+            if (this.value == "") {
+                this.value = "邮箱/手机号/ID"
+                this.className = "ipt";
+            }
+        }
+    </script>
+</body>
+
+</html>

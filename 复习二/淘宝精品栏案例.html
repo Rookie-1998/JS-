@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .wrapper {
+            width: 250px;
+            height: 248px;
+            margin: 100px auto 0;
+            border: 1px solid pink;
+            border-right: 0;
+            overflow: hidden;
+        }
+        
+        #left,
+        #content {
+            float: left;
+        }
+        
+        #left li {
+            background: url(images/lili.jpg) repeat-x;
+        }
+        
+        #left li a {
+            display: block;
+            width: 48px;
+            height: 27px;
+            border-bottom: 1px solid pink;
+            line-height: 27px;
+            text-align: center;
+            color: black;
+        }
+        
+        #left li a:hover {
+            background-image: url(images/abg.gif);
+        }
+        
+        #content {
+            border-left: 1px solid pink;
+            border-right: 1px solid pink;
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+    <script>
+        $(function() {
+            // 获取每个小li
+            $('#left li').mouseover(function() {
+                // 获取每个li的索引号
+                var index = $(this).index();
+                console.log(index);
+                // 让右边对应索引号的图片显示出来就好了
+                $("#content div").eq(index).show();
+                // 把他们的兄弟影藏起来
+                $("#content div").eq(index).siblings().hide();
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <ul id="left">
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+            <li>
+                <a href="#">女鞋</a>
+            </li>
+
+        </ul>
+        <div id="content">
+            <div>
+                <a href="#"><img src="imagess/冬裙.jpg" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="imagess/呢大衣.jpg" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="imagess/围巾.jpg" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="" alt=""></a>
+            </div>
+
+            <div>
+                <a href="#"><img src="" alt=""></a>
+            </div>
+
+        </div>
+</body>
+
+</html>
